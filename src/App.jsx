@@ -1,11 +1,9 @@
-
 function App() {
-
   return (
     <>
-     oi
+      <div className="h-100 w-100 bg-slate-900"></div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
