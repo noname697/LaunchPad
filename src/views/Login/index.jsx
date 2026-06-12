@@ -49,12 +49,18 @@ const Login = ({ onLogin }) => {
 
         <form action={formAction} className="">
           <div className="">
-            <label htmlFor="" className=""></label>
-            <input type="text" className="" />
+            <label htmlFor="name" className=""></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="John Doe"
+              className=""
+            />
           </div>
           <div className="">
-            <label htmlFor="" className=""></label>
-            <input type="text" className="" />
+            <label htmlFor="email" className=""></label>
+            <input type="text" id="email" name="email" placeholder="john.doe@example.com" className="" />
           </div>
 
           {state.error && <p className="">{state.error}</p>}
