@@ -25,7 +25,7 @@ export const getProjects = () => {
   return JSON.parse(projects);
 };
 
-export const saveProjects = (project) => {
+export const saveProject = (project) => {
   const projects = getProjects();
 
   const updateProjects = [project, ...projects];
