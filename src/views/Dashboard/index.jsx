@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { getUser, removeUser } from "../../utils/storage";
+import Button from "../../components/Button";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,12 +20,10 @@ const Dashboard = () => {
           <h1 className="text-3xl font-bold">Hello, {user.name}</h1>
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="rounded-xl border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition"
-        >
+        <Button variant="secondary" onClick={handleLogout}>
           Logout
-        </button>
+        </Button>
+
       </header>
 
       <section className="max-w-5xl mx-auto">
@@ -34,10 +33,7 @@ const Dashboard = () => {
           <p className="text-slate-400 mb-6">
             Soon, your saved projects will appear here.
           </p>
-
-          <button className="rounded-xl bg-cyan-400 text-slate-950 font-semibold px-5 py-3 hover:bg-cyan-300 transition">
-            Create new project
-          </button>
+          <Button>Create new project</Button>
         </div>
       </section>
     </main>
