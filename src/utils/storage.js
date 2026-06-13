@@ -25,6 +25,11 @@ export const getProjects = () => {
   return JSON.parse(projects);
 };
 
+export const getProjectById = (projectId) => {
+  const projects = getProjects();
+  return projects.find((project) => project.id === projectId);
+};
+
 export const saveProject = (project) => {
   const projects = getProjects();
 
