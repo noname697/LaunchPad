@@ -6,7 +6,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const user = getUser();
   const projects = getProjects();
-  console.log(projects[0]);
 
   const handleLogout = () => {
     removeUser();
