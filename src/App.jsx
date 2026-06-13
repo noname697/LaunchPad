@@ -1,11 +1,23 @@
+import { Navigate, Route, Routes } from "react-router";
+import PublicRoute from "./routes/PublicRoute";
 import Login from "./views/Login";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Dashboard from "./views/Dashboard";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Login />
-    </>
+    <Routes>
+      <Route path="/" element={<Navigate to="dashboard" replace />} />
+
+      <Route element={<PublicRoute />}>
+        <Route path="/auth/login" element={<Login />} />
+      </Route>
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+    </Routes>
   );
-}
+};
 
 export default App;

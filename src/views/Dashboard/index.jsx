@@ -1,9 +1,13 @@
-import { removeUser } from "../../utils/storage";
+import { useNavigate } from "react-router";
+import { getUser, removeUser } from "../../utils/storage";
 
-const Dashboard = ({ user, onLogout }) => {
+const Dashboard = () => {
+  const navigate = useNavigate();
+  const user = getUser();
+
   const handleLogout = () => {
     removeUser();
-    onLogout();
+    navigate("/auth/login", { replace: true });
   };
 
   return (

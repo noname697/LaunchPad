@@ -1,11 +1,14 @@
 import { useActionState } from "react";
 import { saveUser } from "../../utils/storage";
+import { useNavigate } from "react-router";
 
 const initialState = {
   error: "",
 };
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
+
   const loginAction = (previousState, formData) => {
     const name = formData.get("name")?.trim();
     const email = formData.get("email")?.trim();
@@ -24,7 +27,8 @@ const Login = ({ onLogin }) => {
     };
 
     saveUser(user);
-    onLogin(user);
+
+    navigate("/dashboard", { replace: true });
 
     return {
       error: "",
