@@ -75,7 +75,7 @@ const NewProject = () => {
     <main className="">
       <section className="">
         <div className="">
-          <Link to="dashboard" className="">
+          <Link to="/dashboard" className="">
             ← Back to dashboard
           </Link>
           <h1 className="">Create new project</h1>

@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router";
-import { getUser, removeUser } from "../../utils/storage";
+import { Link, useNavigate } from "react-router";
+import { getProjects, getUser, removeUser } from "../../utils/storage";
 import Button from "../../components/Button";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const user = getUser();
+  const projects = getProjects();
 
   const handleLogout = () => {
     removeUser();
@@ -17,24 +18,77 @@ const Dashboard = () => {
         <div>
           <p className="text-sm text-cyan-400 mb-1">LaunchApp</p>
 
-          <h1 className="text-3xl font-bold">Hello, {user.name}</h1>
+          <h1 className="text-3xl font-bold">Hello, {user?.name}</h1>
         </div>
 
         <Button variant="secondary" onClick={handleLogout}>
           Logout
         </Button>
-
       </header>
 
       <section className="max-w-5xl mx-auto">
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
-          <h2 className="text-2xl font-semibold mb-3">Your Projects</h2>
+        <div className="">
+          <div>
+            <h2 className="">Your projects</h2>
+            <p className="">
+              Manage your saved projects and prepare submission materials.
+            </p>
+          </div>
 
-          <p className="text-slate-400 mb-6">
-            Soon, your saved projects will appear here.
-          </p>
-          <Button>Create new project</Button>
+          <Link to="/projects/new"> Create new project</Link>
         </div>
+
+        {projects.length === 0 ? (
+          <div className="">
+            <h3 className="">No projects yet</h3>
+
+            <p className="">
+              Create you first project to start generating README templates,
+              devlogs, checklists, and descriptions.
+            </p>
+
+            <Link to="/projects/new">Create your first project</Link>
+          </div>
+        ) : (
+          <div className="">
+            {projects.map((project) => (
+              <article key={project.id} className="">
+                <div className="">
+                  <div>
+                    <span className="">{project.type}</span>
+                    <h3 className="">{project.name}</h3>
+                  </div>
+
+                  <span className="">{project.status}</span>
+                </div>
+
+                <p className="">{project.shortDescription}</p>
+
+                {project.technologies.length > 0 && (
+                  <div className="">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="">
+                  <p className="">Selected generators: </p>
+
+                  <div className="">
+                    {project.selectGenerators.map((generator) => (
+                      <span key={generator} className="">
+                        {generator}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
