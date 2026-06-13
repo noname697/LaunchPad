@@ -1,4 +1,4 @@
-export const downloadFile = (content, fileName) => {
+export const downloadTextFile = (content, fileName) => {
   const blob = new Blob([content], {
     type: "text/plain;charset=utf-8",
   });
