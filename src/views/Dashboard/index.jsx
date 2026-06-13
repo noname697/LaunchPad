@@ -6,6 +6,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const user = getUser();
   const projects = getProjects();
+  console.log(projects[0]);
 
   const handleLogout = () => {
     removeUser();
@@ -78,7 +79,10 @@ const Dashboard = () => {
                   <p className="">Selected generators: </p>
 
                   <div className="">
-                    {project.selectGenerators.map((generator) => (
+                    {(Array.isArray(project.selectGenerators)
+                      ? project.selectGenerators
+                      : []
+                    ).map((generator) => (
                       <span key={generator} className="">
                         {generator}
                       </span>
