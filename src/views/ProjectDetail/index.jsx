@@ -12,9 +12,17 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
 
   const project = getProjectById(id);
+  const selectedGenerators = Array.isArray(project?.selectedGenerators)
+    ? project.selectedGenerators
+    : Array.isArray(project?.selectGenerators)
+      ? project.selectGenerators
+      : [];
+  const technologies = Array.isArray(project?.technologies)
+    ? project.technologies
+    : [];
 
   const [selectedResource, setSelectedResource] = useState(
-    project?.selectedGenerators?.[0] || "",
+    selectedGenerators[0] || "",
   );
 
   const [copyMessage, setCopyMessage] = useState("");
@@ -143,9 +151,9 @@ const ProjectDetail = () => {
                 <div>
                   <p className="">Technologies</p>
 
-                  {project.technologies.length > 0 ? (
+                  {technologies.length > 0 ? (
                     <div className="">
-                      {project.technologies.map((technologie) => (
+                      {technologies.map((technologie) => (
                         <span key={technologie} className="">
                           {technologie}
                         </span>
@@ -162,7 +170,7 @@ const ProjectDetail = () => {
               <h2 className="">Generate resources</h2>
 
               <div className="">
-                {project.selectedGenerators.map((generator) => (
+                {selectedGenerators.map((generator) => (
                   <button
                     key={generator}
                     onClick={() => setSelectedResource(generator)}

@@ -109,6 +109,14 @@ const Dashboard = () => {
                     ))}
                   </div>
                 </div>
+                <div className="mt-5">
+                  <Link
+                    to={`/projects/${project.id}`}
+                    className="inline-block rounded-xl border border-slate-700 text-slate-300 font-semibold px-4 py-2 hover:border-cyan-400 hover:text-cyan-400 transition"
+                  >
+                    Open project
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
