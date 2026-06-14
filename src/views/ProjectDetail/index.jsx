@@ -6,6 +6,7 @@ import {
   getResourcesFileName,
 } from "../../utils/generators";
 import { downloadTextFile } from "../../utils/downloadFile";
+import Button from "../../components/Button";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -29,16 +30,19 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <main className="">
-        <section className="">
-          <Link to="/dashboard" className="">
+      <main className="min-h-screen bg-slate-950 text-white px-6 py-8">
+        <section className="max-w-2xl mx-auto">
+          <Link
+            to="/dashboard"
+            className="text-sm text-cyan-400 hover:text-cyan-300 transition"
+          >
             ← Back to dashboard
           </Link>
 
-          <div className="">
-            <h1 className="">Project Not Found</h1>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mt-8">
+            <h1 className="text-3xl font-bold mb-3">Project not found</h1>
 
-            <p className="">
+            <p className="text-slate-400">
               This project may have been deleted or does not exist.
             </p>
           </div>
@@ -83,98 +87,111 @@ const ProjectDetail = () => {
   };
 
   return (
-    <main className="">
-      <section className="">
-        <div className="">
-          <Link to="/dashboard" className="">
+    <main className="min-h-screen bg-slate-950 text-white px-6 py-8">
+      <section className="max-w-6xl mx-auto">
+        <div className="mb-8">
+          <Link
+            to="/dashboard"
+            className="text-sm text-cyan-400 hover:text-cyan-300 transition"
+          >
             ← Back to dashboard
           </Link>
 
-          <div className="">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 mt-6">
             <div>
-              <span className="">{project.type}</span>
+              <span className="inline-block text-xs text-cyan-400 hover:text-cyan-300 transition">
+                {project.type}
+              </span>
 
-              <h1 className="">{project.name}</h1>
+              <h1 className="text-4xl font-bold mb-3">{project.name}</h1>
 
-              <p className="">{project.shortDescription}</p>
+              <p className="text-slate-400 max-w-2xl">
+                {project.shortDescription}
+              </p>
             </div>
 
-            <button onClick={handleDeleteProject} className="">
+            <button
+              onClick={handleDeleteProject}
+              className="rounded-xl border border-red-500/40 text-red-400 px-5 py-3 font-semibold hover:bg-red-500/10 transition"
+            >
               Delete project
             </button>
           </div>
         </div>
 
-        <div className="">
-          <aside className="">
-            <section className="">
-              <h2 className="">Project info</h2>
-              <div className="">
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6">
+          <aside className="space-y-6">
+            <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+              <h2 className="text-xl font-semibold mb-4">Project info</h2>
+              <div className="space-y-4 text-sm">
                 <div>
-                  <p className="">Status</p>
-                  <p className="">{project.status}</p>
+                  <p className="text-slate-500 mb-1">Status</p>
+                  <p className="text-slate-300">{project.status}</p>
                 </div>
 
                 <div>
-                  <p className="">GitHub</p>
+                  <p className="text-slate-500 mb-1">GitHub</p>
 
                   {project.githubLink ? (
                     <a
                       href={project.githubLink}
                       target="_blank"
                       rel="noreferrer"
-                      className=""
+                      className="text-cyan-400 hover:text-cyan-300 break-all"
                     >
                       {project.githubLink}
                     </a>
                   ) : (
-                    <p className="">Not added</p>
+                    <p className="text-slate-300">Not added</p>
                   )}
                 </div>
 
                 <div>
-                  <p className="">Demo</p>
+                  <p className="text-slate-500 mb-1">Demo</p>
                   {project.demoLink ? (
                     <a
                       href={project.demoLink}
                       target="_blank"
                       rel="noreferrer"
-                      className=""
+                      className="text-cyan-400 hover:text-cyan-300 break-all"
                     >
                       {project.demoLink}
                     </a>
                   ) : (
-                    <p className="">Not added</p>
+                    <p className="text-slate-300">Not added</p>
                   )}
                 </div>
 
                 <div>
-                  <p className="">Technologies</p>
+                  <p className="text-slate-500 mb-2">Technologies</p>
 
                   {technologies.length > 0 ? (
-                    <div className="">
+                    <div className="flex flex-wrap gap-2">
                       {technologies.map((technologie) => (
-                        <span key={technologie} className="">
+                        <span
+                          key={technologie}
+                          className="text-xs rounded-full bg-slate-950 border border-slate-700 px-3 py-1 text-slate-300"
+                        >
                           {technologie}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <p className="">Not specified</p>
+                    <p className="text-slate-300">Not specified</p>
                   )}
                 </div>
               </div>
             </section>
 
-            <section className="">
-              <h2 className="">Generate resources</h2>
+            <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+              <h2 className="text-xl font-semibold mb-4">Generate resources</h2>
 
-              <div className="">
+              <div className="space-y-3">
                 {selectedGenerators.map((generator) => (
                   <button
                     key={generator}
                     onClick={() => setSelectedResource(generator)}
-                    className=""
+                    className={`w-full text-left rounded-xl border px-4 py-3 transition ${selectedResource === generator ? "border-cyan-400 bg-cyan-400/10 text-cyan-300" : "border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-400"}`}
                   >
                     {generator}
                   </button>
@@ -183,32 +200,38 @@ const ProjectDetail = () => {
             </section>
           </aside>
 
-          <section className="">
-            <div className="">
+          <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
               <div>
-                <p className="">Generated resource</p>
+                <p className="text-sm text-cyan-400 mb-1">Generated resource</p>
 
-                <h2 className="">{selectedResource || "Select a resource"}</h2>
+                <h2 className="text-2xl font-semibold">
+                  {selectedResource || "Select a resource"}
+                </h2>
               </div>
 
-              <div className="">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleCopyResource}
                   disabled={!generatedContent}
-                  className=""
+                  className="rounded-xl border border-slate-700 text-slate-300 font-semibold px-5 py-3 hover:border-cyan-400 hover:text-cyan-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {copyMessage || "Copy"}
                 </button>
-                <button
+                <Button
                   onClick={handleDownloadResource}
                   disabled={!generatedContent}
-                  className=""
+                  classes="disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Download
-                </button>
+                </Button>
               </div>
             </div>
-            <textarea value={generatedContent} readOnly className=""></textarea>
+            <textarea
+              value={generatedContent}
+              readOnly
+              className="w-full min-h-127.5 resize-none rounded-xl bg-slate-950 border border-slate-700 p-5 text-sm text-slate-200 outline-none font-mono leading-6"
+            />
           </section>
         </div>
       </section>

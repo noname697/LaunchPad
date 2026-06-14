@@ -24,48 +24,60 @@ const formatLinks = (project) => {
   return links.join("\n");
 };
 
+const getSelectedGenerators = (project) => {
+  if (Array.isArray(project?.selectedGenerators)) {
+    return project.selectedGenerators;
+  }
+
+  if (Array.isArray(project?.selectGenerators)) {
+    return project.selectGenerators;
+  }
+
+  return [];
+};
+
 const createReadme = (project) => {
   return `# ${project.name}
 
-    ## About
+## About
 
-    ${project.shortDescription}
+${project.shortDescription}
 
-    ## Project Type
+## Project Type
 
-    ${project.type}
+${project.type}
 
-    ## Project Goal
+## Project Goal
 
-    ${project.goal || "This project was created to make a repetitive workflow smoother and easier."}
+${project.goal || "This project was created to make a repetitive workflow smoother and easier."}
 
-    ## Technologies Used
+## Technologies Used
 
-    ${formatTechnologies(project.technologies)}
+${formatTechnologies(project.technologies)}
 
-    ## Links
+## Links
 
-    ${formatLinks(project)}
+${formatLinks(project)}
 
-    ## How to Run
+## How to Run
 
-    ~~~bash
-    npm install
-    npm run dev
-    ~~~
+~~~bash
+npm install
+npm run dev
+~~~
 
-    ## Challenges
+## Challenges
 
-    ${project.challenges || "Write about the main challenges you faced while building this project."}
+${project.challenges || "Write about the main challenges you faced while building this project."}
 
-    ## What I Learned
+## What I Learned
 
-    ${project.learned || "Write about what you learned while developing this project."}
+${project.learned || "Write about what you learned while developing this project."}
 
-    ## AI Usage
+## AI Usage
 
-    This project used IA assistence for planning, documentation, and debugging support.
-    `;
+This project used IA assistence for planning, documentation, and debugging support.
+`;
 };
 
 const createGithubDescription = (project) => {
@@ -78,90 +90,92 @@ const createGithubDescription = (project) => {
 };
 
 const createDevLog = (project) => {
+  const selectedGenerators = getSelectedGenerators(project);
+
   return `# DevLog - ${project.name}
     
-    Today I worked on ${project.name}, a ${project.type.toLowerCase()} project focused on improving quality of life by making a repetitive workflow smoother.
+Today I worked on ${project.name}, a ${project.type.toLowerCase()} project focused on improving quality of life by making a repetitive workflow smoother.
 
-    I added the main project information, organized the submission details, and prepared the selected generation resources.
+I added the main project information, organized the submission details, and prepared the selected generation resources.
 
-    ## Progress
+## Progress
 
-    - Project type: ${project.type}
-    - Technologies: ${project.technologies && project.technologies.length === 0 ? project.technologies.join(", ") : "Not specified"}
-    - Selected resources: ${project.selectedGenerators.join(", ")}
+- Project type: ${project.type}
+- Technologies: ${project.technologies && project.technologies.length > 0 ? project.technologies.join(", ") : "Not specified"}
+- Selected resources: ${selectedGenerators.length > 0 ? selectedGenerators.join(", ") : "Not specified"}
 
-    ## Challenges
+## Challenges
 
-    ${project.challenges || "The main challenge was organizing the project flow in a simple and useful way."}
+${project.challenges || "The main challenge was organizing the project flow in a simple and useful way."}
 
-    ## What I Learned
+## What I Learned
 
-    ${project.learned || "I learned more about building practical tools that save time in repeated tasks."}
-    `;
+${project.learned || "I learned more about building practical tools that save time in repeated tasks."}
+`;
 };
 
 const createChecklist = (project) => {
   return `# Submission Checklist - ${project.name}
     
-    ## Basic Information
+## Basic Information
 
-    - [ ] Project has a clear name
-    - [ ] Project has a short description
-    - [ ] Project type is selected
-    - [ ] Technologies are listed
+- [ ] Project has a clear name
+- [ ] Project has a short description
+- [ ] Project type is selected
+- [ ] Technologies are listed
 
-    ## Links
+## Links
 
-    - [ ] GitHub repository is public
-    - [ ] Demo link works
-    - [ ] Screenshots or preview images were added
+- [ ] GitHub repository is public
+- [ ] Demo link works
+- [ ] Screenshots or preview images were added
 
-    ## Documentation
-    - [ ] README.md is completed
-    - [ ] Installation instruction are clear
-    - [ ] Features are described
-    - [ ] Challenges are explained
-    - [ ] What I learned is included
+## Documentation
+- [ ] README.md is completed
+- [ ] Installation instruction are clear
+- [ ] Features are described
+- [ ] Challenges are explained
+- [ ] What I learned is included
 
-    ## Final Submission
-    - [ ] DevLog is written
-    - [ ] AI Usage Statement is included if needed
-    - [ ] Submission text is ready
-    - [ ] Project was tested before submitting
-    `;
+## Final Submission
+- [ ] DevLog is written
+- [ ] AI Usage Statement is included if needed
+- [ ] Submission text is ready
+- [ ] Project was tested before submitting
+`;
 };
 
 const createAiUsageStatement = (project) => {
   return `# AI Usage Statement - ${project.name}
-    AI tools were used during the development of ${project.name} to help planning, documentation, write support, and debugging ideas.
+AI tools were used during the development of ${project.name} to help planning, documentation, write support, and debugging ideas.
 
-    The project idea, implementation decisions, code adaptation, testing, and final project direction were revised handled by the developer.
-    `;
+The project idea, implementation decisions, code adaptation, testing, and final project direction were revised handled by the developer.
+`;
 };
 
 const createSubmissionText = (project) => {
   return `# ${project.name}
-    
-    ## What did you make?
 
-    I made ${project.name}, a ${project.type.toLowerCase()} project that helps make life smoother by reducing repetitive work.
+## What did you make?
 
-    ${project.shortDescription}
+I made ${project.name}, a ${project.type.toLowerCase()} project that helps make life smoother by reducing repetitive work.
 
-    ## What was challenging?
+${project.shortDescription}
 
-    ${project.challenges || "The most challenging part was organizing the project flow and making the tool simple enough to be useful."}
+## What was challenging?
 
-    ## What are you proud of?
+${project.challenges || "The most challenging part was organizing the project flow and making the tool simple enough to be useful."}
 
-    I am proud that this project solves a real workflow problem and can save time whenever someone needs to prepare a project submission.
+## What are you proud of?
 
-    ## What should people know so they can test it?
+I am proud that this project solves a real workflow problem and can save time whenever someone needs to prepare a project submission.
 
-    ${project.demoLink ? `Demo: ${project.demoLink}` : "The project can be tested locally by installing the dependencies and running the development server."}
-    
-    ${project.githubLink ? `GitHub: ${project.githubLink}` : ""}
-    `;
+## What should people know so they can test it?
+
+${project.demoLink ? `Demo: ${project.demoLink}` : "The project can be tested locally by installing the dependencies and running the development server."}
+
+${project.githubLink ? `GitHub: ${project.githubLink}` : ""}
+`;
 };
 
 export const getGenerateResources = (project, resourceType) => {
@@ -169,6 +183,7 @@ export const getGenerateResources = (project, resourceType) => {
     README: createReadme,
     "GitHub Description": createGithubDescription,
     DevLog: createDevLog,
+    Checklist: createChecklist,
     CheckList: createChecklist,
     "AI Usage Statement": createAiUsageStatement,
     "Submission Text": createSubmissionText,
@@ -189,14 +204,15 @@ export const getResourcesFileName = (project, resourceType) => {
     .replaceAll(" ", "-")
     .replace(/[^a-z0-9-]/g, "");
 
-    const fileNames = {
-        README: "README.md",
-        "GitHub Description": `${projectSlug}-github-description.txt`,
-        DevLog: `${projectSlug}-devlog.md`,
-        Checklist: `${projectSlug}-checklist.md`,
-        "AI Usage Statement": `${projectSlug}-ai-usage.md`,
-        "Submission Text": `${projectSlug}-submission.md`
-    }
+  const fileNames = {
+    README: "README.md",
+    "GitHub Description": `${projectSlug}-github-description.txt`,
+    DevLog: `${projectSlug}-devlog.md`,
+    CheckList: `${projectSlug}-checklist.md`,
+    Checklist: `${projectSlug}-checklist.md`,
+    "AI Usage Statement": `${projectSlug}-ai-usage.md`,
+    "Submission Text": `${projectSlug}-submission.md`,
+  };
 
-    return fileNames[resourceType] || `${projectSlug}.txt`
+  return fileNames[resourceType] || `${projectSlug}.txt`;
 };
