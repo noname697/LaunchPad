@@ -4,7 +4,7 @@ A quality-of-life web app that helps makers organize projects and quickly genera
 
 ## Live Demo
 
-[Open the live demo here](https://launch-pad-swart.vercel.app/auth/login)
+[Open the live demo here](launch-co04y1amy-arthur-manentis-projects.vercel.app)
 
 ## Screenshot
 
