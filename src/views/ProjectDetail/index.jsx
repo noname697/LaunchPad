@@ -21,7 +21,7 @@ const ProjectDetail = () => {
   const technologies = Array.isArray(project?.technologies)
     ? project.technologies
     : [];
-
+console.log(selectedGenerators)
   const [selectedResource, setSelectedResource] = useState(
     selectedGenerators[0] || "",
   );

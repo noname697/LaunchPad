@@ -85,6 +85,7 @@ const createGithubDescription = (project) => {
     project.technologies && project.technologies.length > 0
       ? `Built with ${project.technologies.join(", ")}.`
       : "";
+  console.log(techText);
 
   return `${project.shortDescription}${techText}`;
 };
@@ -181,7 +182,7 @@ ${project.githubLink ? `GitHub: ${project.githubLink}` : ""}
 export const getGenerateResources = (project, resourceType) => {
   const generators = {
     README: createReadme,
-    "GitHub Description": createGithubDescription,
+    "GitHub description": createGithubDescription,
     DevLog: createDevLog,
     Checklist: createChecklist,
     CheckList: createChecklist,
